@@ -1,0 +1,15 @@
+{
+  "name": "js-debug-demo",
+  "version": "1.0.0",
+  "main": "bug1-offby-one.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}

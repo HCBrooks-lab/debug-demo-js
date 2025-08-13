@@ -1,73 +1,58 @@
+// Standardized logger so all lines are consistent
+const log = (n, msg) => console.log(`[#${n}] ${msg}`);
+
 // ==============================
 // Debug #1: Greeting Function
-// Description: Fixes a case-sensitive typo (Name vs name). 
 // ==============================
-
 function greetUser(name) {
-    let greeting = "Hello, " + name; // Original Line let greeting = "Hello, " + Name;
-    console.log(greeting);
+  // (Bug was case sensitivity; fixed)
+  const greeting = `Greeting: Hello, ${name}`;
+  log(1, greeting);
 }
 greetUser("Hallene");
 
-
-
 // ==============================
 // Debug #2: Array Indexing Issue
-// Description: Demonstrates an 'undefined' output from out-of-bounds index.
 // ==============================
-
-let numbers = [1, 2, 3];
-console.log(numbers[2]); // Buggy Version console.log(numbers[3]); out-of-bounds, and returns 'undefined'. 
-
-
+const numbers = [1, 2, 3];
+// Buggy version would read numbers[3]; we log the correct one
+log(2, `numbers[2] = ${numbers[2]}`);
 
 // =============================================
-// Debug #3: Math Logic Error
-// Description: Incorrectly calculates average due to wrong divisor.
+// Debug #3: Math Logic Error (average)
 // =============================================
+const values = [10, 20, 30];
+const total = values[0] + values[1] + values[2]; // 60
 
-let values = [10, 20, 30];
-let total = values[0] + values[1] + values[2]; // 10 + 20 + 30 = 60
-let average = total / 4; // dividing by 4 instead of 3
-console.log("Average:", average); // Expecting 20, but logs 15.
-// ---------------------------------------------
-// Fixed Version
-let correctAverage = total / 3; // dividing by 3 values
-console.log("Correct Average:", correctAverage); // Logs 20
+// Buggy
+const avgBuggy = total / 4;
+log(3, `Average (buggy) = ${avgBuggy}`);
 
-
+// Fixed
+const avgFixed = total / 3;
+log(3, `Average (fixed) = ${avgFixed}`);
 
 // =============================================
 // Debug #4: Variable Scope Issue
-// Description: Variable declared inside block is inaccessible outside the block. 
 // =============================================
-
+let fixedMessage;
 if (true) {
-    let scopedMessage = "I'm only accessible in this block.";
-    console.log("Inside block:", scopedMessage); // This will work, scopedMessage is accessible. 
+  fixedMessage = "Now I'm declared outside of the block.";
+  log(4, `Inside block (fixed): ${fixedMessage}`);
 }
-// ---------------------------------------------
-// Fixed Version
-let fixedMessage; 
-if (true) {
-    fixedMessage = "Now I'm declared outside of the block.";
-    console.log("Inside block (fixed):", fixedMessage);
-}
-console.log("Outside block (fixed):", fixedMessage); // No error
-
-
+log(4, `Outside block (fixed): ${fixedMessage}`);
 
 // =============================================
-// Debug #5: String Concatenation Bug
-// Description: Adding a number to a string results in concatenation, not addition. 
+// Debug #5: String + Number concatenation
 // =============================================
+const num1 = 10;
+const num2 = "5";
 
-let num1 = 10;
-let num2 = "5"; // num2 is a string vs a number. 
+// Buggy (concatenation)
+const result = num1 + num2;
+log(5, `Incorrect result = ${result}`);
 
-let result = num1 + num2;
-console.log("Incorrect result", result); // Logs "105" instead of 15. 
-// ---------------------------------------------
-// Fixed Version
-let fixedResult = num1 + Number(num2); // Converting string to number. 
-console.log("Correct Result:", fixedResult);     
+// Fixed (coerce string to number)
+const fixedResult = num1 + Number(num2);
+log(5, `Correct result   = ${fixedResult}`);
+
